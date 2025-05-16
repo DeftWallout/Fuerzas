@@ -1,11 +1,10 @@
-from abc import ABC, abstractmethod
 from random import random
 import matplotlib.pyplot as plt
 import numpy as np
-from PIL.ImageChops import constant
 
 
-class Particula():
+
+class Particula:
     carga = 1.0
     masa = 1.0
     vel = np.array([0,0])
@@ -33,29 +32,29 @@ K = 9e9
 dt = 10e-2
 pas = 0
 m_pas = 100
-def coulomb(a,b):
-    r = b.pos - a.pos
+def coulomb(first,second):
+    r = second.pos - first.pos
 
     mg = np.sqrt((r[0]**2)+(r[1]**2))
     print('La distancia es: ', mg)
     ru = r/mg
-    f = (K*(a.carga*b.carga)/mg**2)*ru
-    return  f
+    force= (K*(a.carga*b.carga)/mg**2)*ru
+    return  force
 
-def update(a,b):
-    fcc = coulomb(a,b)
-    acc_a = fcc/a.masa
-    acc_b = -fcc/b.masa
-    vel_a = a.vel + acc_a*dt
-    vel_b = b.vel + acc_b * dt
-    pos_a = a.pos + a.vel*dt + (1/2)*acc_a*dt
-    pos_b = b.pos + b.vel * dt + (1 / 2) * acc_b * dt
-    a.set_pos(pos_a)
-    b.set_pos(pos_b)
-    a.set_vel(vel_a)
-    b.set_vel(vel_b)
-    a.set_acc(acc_a)
-    b.set_acc(acc_b)
+def update(first,second):
+    fcc = coulomb(first,second)
+    acc_first = fcc/first.masa
+    acc_second = -fcc/second.masa
+    vel_first = a.vel + acc_first*dt
+    vel_second = b.vel + acc_second * dt
+    pos_first = a.pos + a.vel*dt + (1/2)*acc_first*dt
+    pos_second = b.pos + b.vel * dt + (1 / 2) * acc_second * dt
+    a.set_pos(pos_first)
+    b.set_pos(pos_second)
+    a.set_vel(vel_first)
+    b.set_vel(vel_second)
+    a.set_acc(acc_first)
+    b.set_acc(acc_second)
 
 a = Particula()
 b = Particula()
