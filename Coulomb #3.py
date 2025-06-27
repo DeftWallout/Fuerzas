@@ -1,17 +1,10 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 16 11:34:09 2025
-
-@author: Melissa Niño
-"""
-
 import numpy as np
 import matplotlib.pyplot as plt
 
 K = 9e+9
 DELTA_T = 1e-3
-L = 1000
-N = 10  # Número de partículas
+L = 10000
+N = 10 # Número de partículas
 
 
 class Particle:
@@ -91,6 +84,18 @@ for _ in range(2000):
             if dist != 0:
                 total_pe += K * particles[i].charge * particles[j].charge / dist
     potential_energies.append(total_pe)
+vx = [p.vel[0] for p in particles]
+vy = [p.vel[1] for p in particles]
+velocidades = np.sqrt(np.array(vx)**2+np.array(vy)**2)
+
+num_bins = 50
+plt.figure()
+plt.hist(velocidades, bins=num_bins, density=True, color='skyblue', edgecolor='black')
+plt.xlabel('Velocidad |v| (m/s)')
+plt.ylabel('Distribución normalizada')
+plt.title('Distribución de velocidades al final de la simulación')
+plt.grid(True)
+plt.show()
 
 # Graficar trayectorias
 plt.figure(figsize=(8, 8))
