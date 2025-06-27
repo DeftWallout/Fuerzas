@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 K = 9e+9
 DELTA_T = 1e-3
 L = 10000
-N = 10 # Número de partículas
+N = 100 # Número de partículas
 
 
 class Particle:
